@@ -1,0 +1,79 @@
+@page "/rooms/{Id:guid}/student-add"
+@using DormitoryManagement.Data.Models
+@using Microsoft.AspNetCore.Authorization
+@inject RoomService RoomService
+@inject NavigationManager NavigationManager
+@inject StudentService StudentService
+@rendermode InteractiveServer
+@attribute [Authorize(Roles = "Admin")]
+
+@if (_isLoading)
+{
+    <p>Loading..</p>
+}
+else
+{
+    @if (_formStep == 0)
+    {
+        <StudentTable Students="_students">
+            <ActionTemplate Context="context">
+                <button @onclick="() => SelectStudentAndContinue(context)" class="btn btn-primary">Select</button>
+            </ActionTemplate>
+        </StudentTable>
+    }
+    else
+    {
+        <label class="form-control w-full max-w-xs mx-auto mb-6">
+            <div class="label">
+                <span class="label-text">Start date?</span>
+            </div>
+            <InputDate @bind-Value="_addStudentToRoomRequest.StartDate" class="input input-bordered w-full max-w-xs"/>
+        </label>
+
+        <label class="form-control w-full max-w-xs mx-auto mb-12">
+            <div class="label">
+                <span class="label-text">End date?</span>
+            </div>
+            <InputDate @bind-Value="_addStudentToRoomRequest.EndDate" class="input input-bordered w-full max-w-xs"/>
+        </label>
+
+
+        <div class="max-w-xs w-full mx-auto">
+            <button @onclick="Submit" class="btn btn-primary w-full">Submit</button>
+        </div>
+    }
+}
+
+@code {
+
+    [Parameter] public Guid Id { get; set; }
+
+    private AddStudentToRoomRequest _addStudentToRoomRequest = new();
+    private List<Student> _students = [];
+    private bool _isLoading;
+    private int _formStep;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _isLoading = true;
+        _addStudentToRoomRequest.RoomId = Id;
+        _students = await StudentService.GetAllStudents();
+        _isLoading = false;
+    }
+
+    private void SelectStudentAndContinue(Student selectedStudent)
+    {
+        _addStudentToRoomRequest.StudentId = selectedStudent.Id;
+
+        _formStep++;
+    }
+
+
+    private async Task Submit()
+    {
+        
+        await RoomService.AssignStudentToRoom(_addStudentToRoomRequest);
+        NavigationManager.NavigateTo($"rooms/{Id}");
+    }
+
+}

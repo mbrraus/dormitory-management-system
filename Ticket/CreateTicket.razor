@@ -1,0 +1,158 @@
+@page "/create-ticket"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Antiforgery
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.EntityFrameworkCore
+@using DormitoryManagement.Data.Models
+@using DormitoryManagement.Data
+@attribute [Authorize(Roles = "Admin, Student")]
+@attribute [RequireAntiforgeryToken(required: false)]
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IDbContextFactory<DormitoryContext> ContextFactory
+
+
+@if (!_isLoading)
+{
+    @if (_role == "Admin")
+    {
+        <h2>@_userName</h2>
+        <div class="overflow-x-auto">
+            <table class="table table-zebra">
+                <thead>
+                <tr>
+                    <th>Room</th>
+                    <th>Student</th>
+                    <th>Is Closed</th>
+                    <th>Message</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var ticket in _allTickets)
+                {
+                    <tr>
+                        <td>@ticket.Room.Number</td>
+                        <td>@ticket.Student.Email</td>
+                        <td>@ticket.IsClosed</td>
+                        <td>@ticket.Message</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <h2>@_userName</h2>
+        <h2>@Student.RoomAssignment.Room.Number</h2>
+        <form method="post" @onsubmit="Submit" @formname="add-ticket-form">
+            <label class="form-control w-full max-w-xs mx-auto mb-6">
+                <div class="label">
+                    <span class="label-text">Message?</span>
+                </div>
+                <InputTextArea @bind-Value="CreateTicketRequest.Message" class="input input-bordered w-full max-w-xs"/>
+            </label>
+
+            <div class="max-w-xs w-full mx-auto">
+                <button type="submit" class="btn btn-primary w-full">Submit</button>
+            </div>
+        </form>
+        
+        
+        <h2>Your tickets</h2>
+        <div class="overflow-x-auto">
+            <table class="table table-zebra">
+                <thead>
+                <tr>
+                    <th>Room</th>
+                    <th>Is Closed</th>
+                    <th>Message</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var ticket in Student.Tickets)
+                {
+                    <tr>
+                        <td>@ticket.Room.Number</td>
+                        <td>@ticket.IsClosed</td>
+                        <td>@ticket.Message</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+
+@code {
+
+    [SupplyParameterFromForm] public CreateTicketRequest CreateTicketRequest { get; set; } = new();
+
+    private string _userName = string.Empty;
+    private string _role = string.Empty;
+
+    private bool _isLoading;
+
+    private Student? Student { get; set; }
+
+    private List<Ticket> _allTickets { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _isLoading = true;
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+
+        _role = user.Claims.Where(c => c.Type.Contains("role")).First().Value;
+        _userName = user.Claims.Where(c => c.Type.Contains("name")).First().Value;
+
+        if (_role == "Admin")
+        {
+            await GetAllTickets();
+        }
+        else
+        {
+            await GetStudentByName(_userName);
+        }
+
+        _isLoading = false;
+    }
+
+    private async Task Submit()
+    {
+        await using var context = await ContextFactory.CreateDbContextAsync();
+        
+        Student.Tickets.Add(new Ticket()
+        {
+            Message = CreateTicketRequest.Message,
+            RoomId = Student.RoomAssignment.RoomId,
+        });
+
+        context.Students.Update(Student);
+        await context.SaveChangesAsync();
+
+        await GetStudentByName(_userName);
+    }
+
+    private async Task GetStudentByName(string name)
+    {
+        await using var context = await ContextFactory.CreateDbContextAsync();
+
+        Student = await context.Students
+            .Include(x => x.RoomAssignment)
+            .ThenInclude(x => x.Room)
+            .Include(x => x.Tickets)
+            .SingleAsync(x => x.Email == _userName);
+    }
+
+    private async Task GetAllTickets()
+    {
+        await using var context = await ContextFactory.CreateDbContextAsync();
+
+        _allTickets = await context.Tickets
+            .Include(x => x.Student)
+            .Include(x => x.Room)
+            .ToListAsync();
+    }
+
+}

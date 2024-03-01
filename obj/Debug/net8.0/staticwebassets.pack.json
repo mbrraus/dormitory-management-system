@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/obj/Debug/net8.0/scopedcss/projectbundle/DormitoryManagement.bundle.scp.css",
+      "PackagePath": "staticwebassets/DormitoryManagement.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.DormitoryManagement.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.DormitoryManagement.props",
+      "PackagePath": "build\\DormitoryManagement.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.DormitoryManagement.props",
+      "PackagePath": "buildMultiTargeting\\DormitoryManagement.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.DormitoryManagement.props",
+      "PackagePath": "buildTransitive\\DormitoryManagement.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

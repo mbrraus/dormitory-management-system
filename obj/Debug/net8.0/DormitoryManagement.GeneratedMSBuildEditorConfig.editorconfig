@@ -1,0 +1,83 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = DormitoryManagement
+build_property.RootNamespace = DormitoryManagement
+build_property.ProjectDir = /Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Auth/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = QXV0aC9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Components/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9XZWF0aGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Components/Shared/GenericTable.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9TaGFyZWQvR2VuZXJpY1RhYmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Rooms/RoomAssignmentAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = Um9vbXMvUm9vbUFzc2lnbm1lbnRBZGQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Rooms/RoomManage.razor]
+build_metadata.AdditionalFiles.TargetPath = Um9vbXMvUm9vbU1hbmFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Rooms/RoomsDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = Um9vbXMvUm9vbXNEYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Students/NewStudentAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = U3R1ZGVudHMvTmV3U3R1ZGVudEFkZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Students/StudentDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = U3R1ZGVudHMvU3R1ZGVudERhc2hib2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Students/StudentTable.razor]
+build_metadata.AdditionalFiles.TargetPath = U3R1ZGVudHMvU3R1ZGVudFRhYmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Ticket/CreateTicket.razor]
+build_metadata.AdditionalFiles.TargetPath = VGlja2V0L0NyZWF0ZVRpY2tldC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-sr12ypo2hr

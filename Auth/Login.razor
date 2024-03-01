@@ -1,0 +1,102 @@
+@page "/login"
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Authentication
+@using DormitoryManagement.Data
+@using Microsoft.AspNetCore.Antiforgery
+@inject IDbContextFactory<DormitoryContext> ContextFactory
+@inject NavigationManager NavigationManager
+@attribute [RequireAntiforgeryToken(required: false)]
+
+<form method="post" @onsubmit="Submit" @formname="login-form">
+    <AntiforgeryToken/>
+    <label class="form-control w-full max-w-xs mx-auto mb-6">
+        <div class="label">
+            <span class="label-text">Email?</span>
+        </div>
+        <InputText @bind-Value="LoginRequest.Email" class="input input-bordered w-full max-w-xs"/>
+    </label>
+
+    <label class="form-control w-full max-w-xs mx-auto mb-6">
+        <div class="label">
+            <span class="label-text">Password?</span>
+        </div>
+        <InputText @bind-Value="LoginRequest.Password" class="input input-bordered w-full max-w-xs"/>
+    </label>
+
+    <div class="max-w-xs w-full mx-auto">
+        <button type="submit" class="btn btn-primary w-full">Submit</button>
+    </div>
+
+</form>
+
+@code {
+    [CascadingParameter] public HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromForm] public LoginRequest LoginRequest { get; set; } = new();
+
+    private async Task Submit()
+    {
+        await using var context = await ContextFactory.CreateDbContextAsync();
+
+        if (await TryLoginAsAdmin(context))
+        {
+            // Admin login successful, navigate or return as necessary
+        }
+        else if (await TryLoginAsStudent(context))
+        {
+            NavigationManager.NavigateTo("create-ticket");
+        }
+        else
+        {
+            // Handle failed login (e.g., invalid credentials)
+        }
+    }
+
+    private async Task<bool> TryLoginAsAdmin(DormitoryContext context)
+    {
+        var admin = await context.Admins.SingleOrDefaultAsync(x => x.Email == LoginRequest.Email);
+        if (admin != null && VerifyPassword(admin.PasswordHash, LoginRequest.Password))
+        {
+            await SignInAsync(admin.Email, "Admin");
+            return true;
+        }
+
+        return false;
+    }
+
+    private async Task<bool> TryLoginAsStudent(DormitoryContext context)
+    {
+        var student = await context.Students.SingleOrDefaultAsync(x => x.Email == LoginRequest.Email);
+        if (student != null && VerifyPassword(student.PasswordHash, LoginRequest.Password))
+        {
+            await SignInAsync(student.Email, "Student"); //asp core build in ozelligi
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool VerifyPassword(string storedPassword, string providedPassword)
+    {
+        return storedPassword == PasswordHasher.ComputeSha256Hash(providedPassword);
+    }
+
+    private async Task SignInAsync(string email, string role)
+    {
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, email),
+            new Claim(ClaimTypes.Role, role)
+        };
+
+        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), new AuthenticationProperties
+        {
+            IsPersistent = true,
+            ExpiresUtc = DateTime.UtcNow.AddHours(1)
+        });
+    }
+
+}

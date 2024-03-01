@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<div class="drawer md:drawer-open">
+    <input id="my-drawer" type="checkbox" class="drawer-toggle"/>
+    <div class="drawer-content p-12">
+        @Body
+    </div>
+    <div class="drawer-side">
+        <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+        <ul class="menu p-4 w-64 min-h-full bg-base-200 text-base-content">
+            <!-- Sidebar content here -->
+            <li>
+                <a href="rooms">Rooms</a>
+                <a href="students">Students</a>
+                <a href="create-ticket">Ticket</a>
+            </li>
+        </ul>
+    </div>
+</div>
