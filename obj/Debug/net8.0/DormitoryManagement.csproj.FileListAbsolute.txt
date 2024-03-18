@@ -117,3 +117,4 @@
 /Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/bin/Debug/net8.0/Microsoft.AspNetCore.Components.Authorization.dll
 /Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/bin/Debug/net8.0/Microsoft.AspNetCore.Metadata.dll
 /Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
+/Users/mbr/RiderProjects/DormitoryManagement/DormitoryManagement/obj/Debug/net8.0/DormitoryManagement.sourcelink.json
