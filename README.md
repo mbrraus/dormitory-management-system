@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-The Dormitory Management System is a web application I built to make dormitory management smoother and more organized. It gives administrators a single place to oversee room assignments, student details, and inventory, while also offering students a way to quickly report any problems. This speeds up communication and solves issues faster than the old methods. I developed this system using .NET 8.0 and Blazor, and it uses a PostgreSQL database for solid data handling and to provide a smooth experience for users.
+The Dormitory Management System is a web application I built to make dormitory management smoother and more organized. It provides administrators with a single place to oversee room assignments, assigning students to rooms, student details, and inventory. Additionally, it offers students a way to quickly report any problems. This approach speeds up communication and resolves issues faster than traditional methods. I developed this system using .NET 8.0 and Blazor, and it utilizes a PostgreSQL database for reliable data handling and to ensure a smooth experience for users.
 
 ### Frontend Development
 
